@@ -5,8 +5,6 @@
 <title>رسالة حب</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,700&display=swap');
-
 body {
     margin: 0;
     height: 100vh;
@@ -14,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Amiri', serif;
+    font-family: Arial, sans-serif;
     overflow: hidden;
 }
 
@@ -23,23 +21,23 @@ body {
     padding: 40px;
     border-radius: 25px;
     text-align: center;
-    max-width: 400px;
+    max-width: 420px;
     z-index: 2;
 }
 
 #message {
-    font-size: 28px;
-    line-height: 1.7;
+    font-size: 34px;
+    line-height: 1.8;
     font-weight: bold;
     transition: color 0.5s ease;
 }
 
 button {
-    margin-top: 25px;
-    padding: 14px 38px;
+    margin-top: 30px;
+    padding: 15px 40px;
     border: none;
     border-radius: 40px;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     background: #e63946;
     color: white;
@@ -48,17 +46,17 @@ button {
 .heart {
     position: absolute;
     color: #ff4d6d;
-    font-size: 50px;
-    animation: float 3s linear forwards;
+    font-size: 60px;
+    animation: float 3.5s linear forwards;
 }
 
 @keyframes float {
     from {
-        transform: translateY(100vh) scale(1);
+        transform: scale(1);
         opacity: 1;
     }
     to {
-        transform: translateY(-10vh) scale(2);
+        transform: translateY(-100vh) scale(2);
         opacity: 0;
     }
 }
@@ -74,14 +72,14 @@ button {
 
 <script>
 const messages = [
-    "💖✨ عندي كلام ليك من القلب ✨💖",
+    "💖 عندي كلام ليك 💖",
     "🌸 عارفة؟ 🌸",
     "💞 إنتي بالنسبة لي نعمة من ربنا 💞",
     "💫 وجودك في حياتي فرق كبير 💫",
     "😊 ضحكتك بتطمني وبتريحني 😊",
     "🌹 وأجمل حاجة في الدنيا… 🌹",
     "💍 إنك بقيتي مرتي وحلالي يا ست البنات 💕",
-    "❤️✨ عيد حب سعيد يا أغلى إنسانة في حياتي ✨❤️"
+    "❤️ عيد حب سعيد يا أغلى إنسانة في حياتي 🌹"
 ];
 
 const colors = [
@@ -110,32 +108,46 @@ function nextMessage() {
         messageEl.innerText = messages[index];
         messageEl.style.color = colors[index];
 
-        for (let i = 0; i < 10; i++) {
-            createHeart();
-        }
+        // قلوب من الأربع زوايا
+        createHeart("top-left");
+        createHeart("top-right");
+        createHeart("bottom-left");
+        createHeart("bottom-right");
 
-        // آخر رسالة
+        // إخفاء الزر في آخر رسالة
         if (index === messages.length - 1) {
             btn.style.display = "none";
-
-            // قلوب مستمرة
-            setInterval(() => {
-                createHeart();
-            }, 400);
         }
     }
 }
 
-function createHeart() {
+function createHeart(position) {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤";
-    heart.style.left = Math.random() * 100 + "vw";
+
+    if (position === "top-left") {
+        heart.style.top = "0";
+        heart.style.left = "0";
+    }
+    if (position === "top-right") {
+        heart.style.top = "0";
+        heart.style.right = "0";
+    }
+    if (position === "bottom-left") {
+        heart.style.bottom = "0";
+        heart.style.left = "0";
+    }
+    if (position === "bottom-right") {
+        heart.style.bottom = "0";
+        heart.style.right = "0";
+    }
+
     document.body.appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
-    }, 3000);
+    }, 3500);
 }
 </script>
 
