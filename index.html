@@ -16,7 +16,7 @@ body {
     overflow: hidden;
 }
 
-/* صندوق الرسالة */
+/* صندوق المحتوى */
 .box {
     background: rgba(255,255,255,0.15);
     padding: 40px;
@@ -26,7 +26,7 @@ body {
     z-index: 2;
 }
 
-/* اسم دعاء */
+/* الاسم */
 #name {
     font-size: 52px;
     font-weight: bold;
@@ -35,7 +35,7 @@ body {
     animation: glowPulse 2.5s ease-in-out infinite;
 }
 
-/* أنيميشن اللمعان + النبض */
+/* لمعان + نبض الاسم */
 @keyframes glowPulse {
     0% {
         transform: scale(1);
@@ -60,6 +60,35 @@ body {
     line-height: 1.8;
     font-weight: bold;
     transition: color 0.5s ease;
+}
+
+/* التوقيع */
+#signature {
+    margin-top: 28px;
+    font-size: 24px;
+    font-style: italic;
+    color: #f4a261;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 1.8s ease, transform 1.8s ease;
+}
+
+/* نبض ولمعان التوقيع */
+@keyframes softPulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(244,162,97,0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow:
+            0 0 10px rgba(244,162,97,0.7),
+            0 0 20px rgba(244,162,97,0.4);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(244,162,97,0.4);
+    }
 }
 
 /* الزر */
@@ -102,6 +131,7 @@ button {
 <div class="box">
     <div id="name">💖 دعاء 💖</div>
     <h2 id="message"></h2>
+    <div id="signature"></div>
     <button id="btn" onclick="nextMessage()">💌 اضغط هنا</button>
 </div>
 
@@ -131,8 +161,9 @@ const colors = [
 let index = 0;
 const messageEl = document.getElementById("message");
 const btn = document.getElementById("btn");
+const signature = document.getElementById("signature");
 
-// أول رسالة
+/* أول رسالة */
 messageEl.innerText = messages[index];
 messageEl.style.color = colors[index];
 
@@ -143,15 +174,21 @@ function nextMessage() {
         messageEl.innerText = messages[index];
         messageEl.style.color = colors[index];
 
-        // قلوب من الأربع زوايا
+        /* قلوب من الأربع زوايا */
         createHeart("top-left");
         createHeart("top-right");
         createHeart("bottom-left");
         createHeart("bottom-right");
 
-        // آخر رسالة
+        /* آخر رسالة */
         if (index === messages.length - 1) {
             btn.style.display = "none";
+
+            signature.innerText = "— كمال، الاختارك وما ندم ❤️";
+            signature.style.opacity = "1";
+            signature.style.transform = "translateY(0)";
+            signature.style.animation = "softPulse 3s ease-in-out infinite";
+
             setInterval(() => {
                 createHeart(randomCorner());
             }, 500);
