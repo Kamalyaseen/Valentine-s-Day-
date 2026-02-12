@@ -29,6 +29,7 @@ body {
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     position: relative;
+    z-index: 2;
 }
 
 /* الاسم */
@@ -91,6 +92,25 @@ button {
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
+
+/* القلوب */
+.heart {
+    position: absolute;
+    font-size: 70px;
+    animation: floatUp 3.5s linear forwards;
+    z-index: 1;
+}
+
+@keyframes floatUp {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-120vh) scale(2);
+    }
+}
 </style>
 </head>
 
@@ -133,6 +153,8 @@ const messages = [
     "واحفظها لي، لأن القلب دا ما بعرف غيرها."
 ];
 
+const heartColors = ["#ff4d6d","#ff758f","#ffd166","#ffafcc","#cdb4db"];
+
 let index = 0;
 const p1 = document.getElementById("p1");
 const p2 = document.getElementById("p2");
@@ -142,7 +164,6 @@ const signature = document.getElementById("signature");
 
 function nextMessage() {
     if (index < messages.length) {
-
         p1.innerText = messages[index];
         p2.innerText = messages[index + 1];
 
@@ -162,6 +183,9 @@ function nextMessage() {
 
         index += 2;
 
+        // قلوب مع كل ضغطة
+        for (let i = 0; i < 6; i++) createHeart();
+
         if (index >= messages.length) {
             btn.style.display = "none";
             signature.innerText = "— كمال، الاختارك وما ندم ❤️";
@@ -169,6 +193,18 @@ function nextMessage() {
             signature.style.transform = "translateY(0)";
         }
     }
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "0";
+    heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 3500);
 }
 </script>
 
