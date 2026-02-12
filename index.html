@@ -96,19 +96,22 @@ button {
 /* القلوب */
 .heart {
     position: absolute;
-    font-size: 70px;
-    animation: floatUp 3.5s linear forwards;
+    font-size: 65px;
+    animation: floatRandom 6s ease-in-out forwards;
     z-index: 1;
+    pointer-events: none;
 }
 
-@keyframes floatUp {
+@keyframes floatRandom {
     from {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate(0, 0) scale(1);
     }
     to {
         opacity: 0;
-        transform: translateY(-120vh) scale(2);
+        transform: 
+            translate(var(--x), var(--y))
+            scale(1.8);
     }
 }
 </style>
@@ -153,7 +156,7 @@ const messages = [
     "واحفظها لي، لأن القلب دا ما بعرف غيرها."
 ];
 
-const heartColors = ["#ff4d6d","#ff758f","#ffd166","#ffafcc","#cdb4db"];
+const heartColors = ["#ff4d6d","#ff758f","#ffd166","#ffafcc","#cdb4db","#a2d2ff"];
 
 let index = 0;
 const p1 = document.getElementById("p1");
@@ -164,6 +167,7 @@ const signature = document.getElementById("signature");
 
 function nextMessage() {
     if (index < messages.length) {
+
         p1.innerText = messages[index];
         p2.innerText = messages[index + 1];
 
@@ -183,8 +187,8 @@ function nextMessage() {
 
         index += 2;
 
-        // قلوب مع كل ضغطة
-        for (let i = 0; i < 6; i++) createHeart();
+        // قلوب كثيرة وعشوائية
+        for (let i = 0; i < 10; i++) createHeart();
 
         if (index >= messages.length) {
             btn.style.display = "none";
@@ -199,12 +203,21 @@ function createHeart() {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤";
+
+    // مكان بداية عشوائي
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.bottom = "0";
-    heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+    heart.style.top = Math.random() * 100 + "vh";
+
+    // اتجاه عشوائي
+    heart.style.setProperty("--x", (Math.random() * 200 - 100) + "px");
+    heart.style.setProperty("--y", (-Math.random() * 300 - 100) + "px");
+
+    heart.style.color =
+        heartColors[Math.floor(Math.random() * heartColors.length)];
+
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 3500);
+    setTimeout(() => heart.remove(), 6000);
 }
 </script>
 
