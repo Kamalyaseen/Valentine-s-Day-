@@ -16,7 +16,6 @@ body {
     overflow: hidden;
 }
 
-/* صندوق المحتوى */
 .box {
     background: rgba(255,255,255,0.15);
     padding: 40px;
@@ -35,7 +34,6 @@ body {
     animation: glowPulse 2.5s ease-in-out infinite;
 }
 
-/* لمعان + نبض الاسم */
 @keyframes glowPulse {
     0% {
         transform: scale(1);
@@ -54,12 +52,19 @@ body {
     }
 }
 
-/* الرسالة */
-#message {
+/* الرسائل */
+#message p {
+    margin: 0 0 18px 0;
     font-size: 34px;
     line-height: 1.8;
     font-weight: bold;
-    transition: color 0.5s ease;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+#p2 {
+    color: rgba(255,255,255,0.75);
 }
 
 /* التوقيع */
@@ -73,7 +78,6 @@ body {
     transition: opacity 1.8s ease, transform 1.8s ease;
 }
 
-/* نبض ولمعان التوقيع */
 @keyframes softPulse {
     0% {
         transform: scale(1);
@@ -106,9 +110,8 @@ button {
 /* القلوب */
 .heart {
     position: absolute;
-    color: #ff4d6d;
-    font-size: 60px;
-    animation: moveToCenter 3s linear forwards;
+    font-size: 80px;
+    animation: moveToCenter 3.5s linear forwards;
 }
 
 @keyframes moveToCenter {
@@ -119,7 +122,7 @@ button {
     to {
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%) scale(2);
+        transform: translate(-50%, -50%) scale(2.2);
         opacity: 0;
     }
 }
@@ -130,58 +133,87 @@ button {
 
 <div class="box">
     <div id="name">💖 دعاء 💖</div>
-    <h2 id="message"></h2>
+
+    <div id="message">
+        <p id="p1"></p>
+        <p id="p2"></p>
+    </div>
+
     <div id="signature"></div>
     <button id="btn" onclick="nextMessage()">💌 اضغط هنا</button>
 </div>
 
 <script>
 const messages = [
-    "💖 عندي كلام ليك 💖",
-    "🌸 عارفة؟ 🌸",
-    "💞 إنتي بالنسبة لي نعمة من ربنا 💞",
-    "💫 وجودك في حياتي فرق كبير 💫",
-    "😊 ضحكتك بتطمني وبتريحني 😊",
-    "🌹 وأجمل حاجة في الدنيا… 🌹",
-    "💍 إنك بقيتي مرتي وحلالي يا ست البنات 💕",
-    "❤️ عيد حب سعيد يا أغلى إنسانة في حياتي 🌹"
+    "يا رب، قلبي ارتبط بها ارتباطًا لا يشبهه شيء، ارتباطًا تسكن فيه الروح وتطمئن معه النفس.",
+    "في كل لحظة، أجدها أقرب دعائي، وأصدق أمنيتي.",
+
+    "احفظها لي يا الله، واحفظ قلبها من كل ما يؤلم.",
+    "واجعل أيامها نورًا، وروحها سكينة، وابتسامتها أمانًا لا يغيب.",
+
+    "هي سكينتي حين يضيق العالم، وطمأنينتي حين تتعب روحي.",
+    "وجودها فرق في حياتي، وصوتها راحة، ونظرتها حياة.",
+
+    "يا رب، اجعلني لها سندًا صادقًا، وقوةً إذا ضعفت، وأمانًا إذا خافت.",
+    "ولا تجعلها يومًا تشعر بالوحدة وأنا بجانبها.",
+
+    "اجعل بيننا مودة ورحمة، وخطوات متقاربة، وقلوبًا صافية لا تعرف إلا الصدق.",
+    "ولا تجعل بيننا فرقة ولا شقاء.",
+
+    "فإني يا رب، لا أريد من هذه الدنيا غيرها.",
+    "ولا يطيب لي العيش إن لم تكن بخير وسعادة.",
+
+    "قلبي اختارها عن يقين، وما عرف الندم طريقه إليه.",
+    "وسيظل يدعو لك في كل حين أن تحفظها لي ما حييت."
 ];
 
-const colors = [
+const heartColors = [
+    "#ff4d6d",
+    "#ff758f",
     "#ffd166",
     "#ffafcc",
     "#cdb4db",
     "#a2d2ff",
-    "#b7e4c7",
-    "#ffcad4",
-    "#f08080",
-    "#ff4d6d"
+    "#b7e4c7"
 ];
 
 let index = 0;
-const messageEl = document.getElementById("message");
+const p1 = document.getElementById("p1");
+const p2 = document.getElementById("p2");
 const btn = document.getElementById("btn");
 const signature = document.getElementById("signature");
 
-/* أول رسالة */
-messageEl.innerText = messages[index];
-messageEl.style.color = colors[index];
-
 function nextMessage() {
-    index++;
-
     if (index < messages.length) {
-        messageEl.innerText = messages[index];
-        messageEl.style.color = colors[index];
 
-        /* قلوب من الأربع زوايا */
-        createHeart("top-left");
-        createHeart("top-right");
-        createHeart("bottom-left");
-        createHeart("bottom-right");
+        p1.innerText = messages[index];
+        p2.innerText = messages[index + 1];
 
-        /* آخر رسالة */
-        if (index === messages.length - 1) {
+        p1.style.opacity = "0";
+        p2.style.opacity = "0";
+        p1.style.transform = "translateY(10px)";
+        p2.style.transform = "translateY(10px)";
+
+        setTimeout(() => {
+            p1.style.opacity = "1";
+            p1.style.transform = "translateY(0)";
+        }, 100);
+
+        setTimeout(() => {
+            p2.style.opacity = "1";
+            p2.style.transform = "translateY(0)";
+        }, 400);
+
+        index += 2;
+
+        for (let i = 0; i < 3; i++) {
+            createHeart("top-left");
+            createHeart("top-right");
+            createHeart("bottom-left");
+            createHeart("bottom-right");
+        }
+
+        if (index >= messages.length) {
             btn.style.display = "none";
 
             signature.innerText = "— كمال، الاختارك وما ندم ❤️";
@@ -191,7 +223,7 @@ function nextMessage() {
 
             setInterval(() => {
                 createHeart(randomCorner());
-            }, 500);
+            }, 400);
         }
     }
 }
@@ -200,6 +232,8 @@ function createHeart(position) {
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤";
+    heart.style.color =
+        heartColors[Math.floor(Math.random() * heartColors.length)];
 
     if (position === "top-left") {
         heart.style.top = "0";
@@ -220,9 +254,7 @@ function createHeart(position) {
 
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-        heart.remove();
-    }, 3000);
+    setTimeout(() => heart.remove(), 3500);
 }
 
 function randomCorner() {
