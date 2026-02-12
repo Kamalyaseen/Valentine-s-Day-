@@ -1,68 +1,3 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-<meta charset="UTF-8">
-<title>رسالة حب</title>
-
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff4e50, #f9d423);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-}
-
-.box {
-    background: rgba(255,255,255,0.25);
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    max-width: 360px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    background: #c9184a;
-    color: white;
-}
-
-.heart {
-    position: absolute;
-    color: #ff1e56;
-    font-size: 22px;
-    animation: float 4s linear infinite;
-}
-
-@keyframes float {
-    from {
-        transform: translateY(100vh);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="box">
-    <h2 id="message"></h2>
-    <button onclick="nextMessage()">اضغط هنا</button>
-</div>
-
 <script>
 const messages = [
     "💖 عندي كلام ليك 💖",
@@ -77,14 +12,27 @@ const messages = [
 
 let index = 0;
 
-// عرض أول رسالة
-document.getElementById("message").innerText = messages[index];
+const messageEl = document.getElementById("message");
+const buttonEl = document.querySelector("button");
+
+// أول رسالة
+messageEl.innerText = messages[index];
 
 function nextMessage() {
     index++;
+
     if (index < messages.length) {
-        document.getElementById("message").innerText = messages[index];
-        createHeart();
+        messageEl.innerText = messages[index];
+
+        // قلوب أكتر
+        for (let i = 0; i < 6; i++) {
+            createHeart();
+        }
+
+        // لو دي آخر رسالة → أخفي الزر
+        if (index === messages.length - 1) {
+            buttonEl.style.display = "none";
+        }
     }
 }
 
@@ -93,14 +41,11 @@ function createHeart() {
     heart.className = "heart";
     heart.innerHTML = "❤";
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+    heart.style.animationDuration = (2 + Math.random() * 2) + "s";
     document.body.appendChild(heart);
 
     setTimeout(() => {
         heart.remove();
-    }, 5000);
+    }, 4000);
 }
 </script>
-
-</body>
-</html>
