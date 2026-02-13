@@ -23,9 +23,9 @@ body {
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(10px);
     border-radius: 28px;
-    padding: 50px 38px;
+    padding: 55px 40px;
     width: 90%;
-    max-width: 460px;
+    max-width: 480px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     position: relative;
@@ -35,22 +35,22 @@ body {
 /* الاسم */
 #name {
     font-family: 'Reem Kufi Fun', cursive;
-    font-size: 58px;
+    font-size: 64px;
     color: #ffd166;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
     letter-spacing: 3px;
     animation: glow 3s ease-in-out infinite;
 }
 
 @keyframes glow {
-    0%,100% { text-shadow: 0 0 14px #ffd166; }
-    50% { text-shadow: 0 0 36px #ffb703; }
+    0%,100% { text-shadow: 0 0 16px #ffd166; }
+    50% { text-shadow: 0 0 40px #ffb703; }
 }
 
-/* الرسائل — اللون أبيض */
+/* الرسائل */
 .message-box p {
-    font-size: 38px;
-    line-height: 2.2;
+    font-size: 44px;
+    line-height: 2.3;
     margin: 0;
     opacity: 0;
     transform: translateY(14px);
@@ -59,24 +59,24 @@ body {
 }
 
 .message-box p + p {
-    margin-top: 28px;
+    margin-top: 32px;
     color: #ffffff;
 }
 
 /* الفاصل */
 .divider {
-    width: 70px;
+    width: 80px;
     height: 3px;
     background: linear-gradient(to right, transparent, #ffd166, transparent);
-    margin: 32px auto;
+    margin: 36px auto;
     opacity: 0;
     transition: opacity 1s ease;
 }
 
 /* التوقيع */
 #signature {
-    margin-top: 36px;
-    font-size: 28px;
+    margin-top: 40px;
+    font-size: 32px;
     color: #ffffff;
     opacity: 0;
     transform: translateY(12px);
@@ -85,11 +85,11 @@ body {
 
 /* الزر */
 button {
-    margin-top: 44px;
-    padding: 16px 52px;
+    margin-top: 48px;
+    padding: 18px 56px;
     border: none;
     border-radius: 50px;
-    font-size: 20px;
+    font-size: 22px;
     background: linear-gradient(135deg, #e63946, #ff758f);
     color: white;
     cursor: pointer;
@@ -99,7 +99,7 @@ button {
 /* القلوب */
 .heart {
     position: absolute;
-    font-size: 72px;
+    font-size: 76px;
     animation: floatRandom 6.5s ease-in-out forwards;
     z-index: 1;
     pointer-events: none;
@@ -113,6 +113,27 @@ button {
     to {
         opacity: 0;
         transform: translate(var(--x), var(--y)) scale(1.9);
+    }
+}
+
+/* 📱 تكبير خاص بالموبايل */
+@media (max-width: 600px) {
+    #name {
+        font-size: 72px;
+    }
+
+    .message-box p {
+        font-size: 50px;
+        line-height: 2.4;
+    }
+
+    #signature {
+        font-size: 36px;
+    }
+
+    button {
+        font-size: 24px;
+        padding: 20px 60px;
     }
 }
 </style>
@@ -139,10 +160,10 @@ const messages = [
     "ولقيت في قلبها المكان البعرف أرجع ليه من غير خوف.",
 
     "ما كانت مجرد حُب.",
-    "كانت طمأنينة، وكانت الأمان البتعب نلقاه في الزمن دا.",
+    "كانت طمأنينة، وكانت الأمان البنتعب نلقاه في الزمن دا.",
 
     "يا رب، احفظها لي في ضحكتها.",
-    "وفي دمعتها، وفي كل لحظة ضعف وقوة.",
+    "وفي سعادتها، وفي كل لحظة ضعف وقوة.",
 
     "خلّيني دايمًا السبب في راحتها.",
     "وخلّي وجودي في حياتها خير وما وجع.",
@@ -154,8 +175,8 @@ const messages = [
     "واختياره دا كان أجمل قرار.",
 
     "عشان كدا يا رب، ختِم دعائي بيها دايمًا.",
-    "واحفظها لي، لأن القلب دا ما بعرف غيرها."
-];
+    "واحفظها لي، لأن قلبي ما داير غيرها."
+];   "ست البنات❤️"
 
 const heartColors = ["#ff4d6d","#ff758f","#ffd166","#ffafcc","#cdb4db","#a2d2ff"];
 
