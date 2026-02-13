@@ -19,7 +19,7 @@ body {
     color: #fff;
 }
 
-/* ===== نجوم ===== */
+/* نجوم */
 .star {
     position: absolute;
     width: 2px;
@@ -30,23 +30,23 @@ body {
 }
 @keyframes twinkle {
     0%,100% { opacity: 0.3; }
-    50% { opacity: 0.9; }
+    50% { opacity: 1; }
 }
 
-/* ===== قلوب خلفية ===== */
+/* قلوب خلفية */
 .bg-heart {
     position: absolute;
-    font-size: 28px;
+    font-size: 26px;
     color: rgba(199,125,255,0.25);
     animation: drift 18s linear infinite;
     pointer-events: none;
 }
 @keyframes drift {
     from { transform: translateY(110vh); }
-    to { transform: translateY(-120vh); }
+    to   { transform: translateY(-120vh); }
 }
 
-/* ===== الكرت ===== */
+/* الكرت */
 .card {
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
@@ -60,7 +60,7 @@ body {
     z-index: 2;
 }
 
-/* ===== الاسم ===== */
+/* الاسم */
 #name {
     font-family: 'Reem Kufi Fun', cursive;
     font-size: 66px;
@@ -69,17 +69,11 @@ body {
     animation: pulseMain 3s ease-in-out infinite;
 }
 @keyframes pulseMain {
-    0%,100% {
-        transform: scale(1);
-        text-shadow: 0 0 12px #ffd166;
-    }
-    50% {
-        transform: scale(1.07);
-        text-shadow: 0 0 30px #ffd166;
-    }
+    0%,100% { transform: scale(1); text-shadow: 0 0 12px #ffd166; }
+    50% { transform: scale(1.07); text-shadow: 0 0 32px #ffd166; }
 }
 
-/* ===== الرسائل ===== */
+/* الرسائل */
 .message-box p {
     font-size: 46px;
     line-height: 2.4;
@@ -90,16 +84,7 @@ body {
 }
 .message-box p + p { margin-top: 34px; }
 
-/* ===== فاصل ===== */
-.divider {
-    width: 90px;
-    height: 3px;
-    background: linear-gradient(to right, transparent, #ffd166, transparent);
-    margin: 38px auto;
-    opacity: 0;
-}
-
-/* ===== ست البنات ===== */
+/* ست البنات */
 .queen-wrapper {
     position: relative;
     margin-top: 44px;
@@ -113,31 +98,49 @@ body {
     font-size: 60px;
     color: #cdb4db;
     animation: pulseQueen 3s ease-in-out infinite;
-    text-shadow: 0 0 25px rgba(205,180,219,0.9);
+    text-shadow:
+        0 0 10px rgba(205,180,219,0.6),
+        0 0 25px rgba(205,180,219,0.9),
+        0 0 40px rgba(199,125,255,0.6);
 }
 
-/* نبض متزامن */
 @keyframes pulseQueen {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+    0%,100% {
+        transform: scale(1);
+        text-shadow:
+            0 0 10px rgba(205,180,219,0.6),
+            0 0 25px rgba(205,180,219,0.9),
+            0 0 40px rgba(199,125,255,0.6);
+    }
+    50% {
+        transform: scale(1.12);
+        text-shadow:
+            0 0 20px rgba(205,180,219,0.9),
+            0 0 45px rgba(199,125,255,1),
+            0 0 70px rgba(199,125,255,0.8);
+    }
 }
 
-/* ===== قلوب تدور وتنبض ===== */
+/* قلوب تدور وتنبض */
 .orbit {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 190px;
-    height: 190px;
-    margin-left: -95px;
-    margin-top: -95px;
-    animation: spin 9s linear infinite, pulseQueen 3s ease-in-out infinite;
+    width: 200px;
+    height: 200px;
+    margin-left: -100px;
+    margin-top: -100px;
+    animation: spin 10s linear infinite;
 }
 
 .orbit span {
     position: absolute;
-    font-size: 30px;
+    font-size: 32px;
     color: #c77dff;
+    animation: pulseOrbit 3s ease-in-out infinite;
+    text-shadow:
+        0 0 12px rgba(199,125,255,0.8),
+        0 0 25px rgba(199,125,255,1);
 }
 
 .orbit span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
@@ -147,10 +150,15 @@ body {
 
 @keyframes spin {
     from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    to   { transform: rotate(360deg); }
 }
 
-/* ===== التوقيع ===== */
+@keyframes pulseOrbit {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.35); }
+}
+
+/* التوقيع */
 #signature {
     margin-top: 40px;
     font-size: 34px;
@@ -159,7 +167,7 @@ body {
     transition: all 1.8s ease;
 }
 
-/* ===== الزر ===== */
+/* الزر */
 button {
     margin-top: 50px;
     padding: 18px 60px;
@@ -171,7 +179,7 @@ button {
     cursor: pointer;
 }
 
-/* 📱 موبايل */
+/* موبايل */
 @media (max-width: 600px) {
     #name { font-size: 76px; }
     .message-box p { font-size: 52px; }
@@ -211,7 +219,7 @@ for (let i = 0; i < 20; i++) {
 
     <div class="message-box">
         <p id="p1"></p>
-        <div class="divider" id="divider"></div>
+        <div class="divider"></div>
         <p id="p2"></p>
     </div>
 
@@ -256,8 +264,8 @@ function nextMessage() {
         p1.innerText = messages[index];
         p2.innerText = messages[index+1];
         p1.style.opacity = p2.style.opacity = 0;
-        setTimeout(()=>{p1.style.opacity=1;},150);
-        setTimeout(()=>{p2.style.opacity=1;},450);
+        setTimeout(()=>p1.style.opacity=1,150);
+        setTimeout(()=>p2.style.opacity=1,450);
         index += 2;
 
         if (index >= messages.length) {
