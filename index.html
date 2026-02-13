@@ -19,7 +19,7 @@ body{
     color:#fff;
 }
 
-/* ================= القفل ================= */
+/* ========== شاشة القفل ========== */
 .lock-screen{
     position:fixed;
     inset:0;
@@ -43,7 +43,6 @@ body{
     font-family:'Reem Kufi Fun',cursive;
     font-size:36px;
     color:#ffd166;
-    margin-bottom:14px;
 }
 .lock-box p{
     font-size:26px;
@@ -76,7 +75,7 @@ body{
     color:#ffb3c1;
 }
 
-/* ================= الكرت ================= */
+/* ========== الكرت ========== */
 .card{
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);
@@ -86,8 +85,6 @@ body{
     max-width:520px;
     text-align:center;
     box-shadow:0 25px 80px rgba(0,0,0,0.5);
-    position:relative;
-    z-index:1;
 }
 
 /* الاسم */
@@ -121,6 +118,53 @@ body{
     margin:36px auto;
     opacity:0;
     transition:opacity 1s ease;
+}
+
+/* ========== ست البنات ========== */
+.queen-wrapper{
+    position:relative;
+    margin-top:48px;
+    opacity:0;
+    transform:scale(0.8);
+    transition:all 1.6s ease;
+}
+
+#queen{
+    font-family:'Reem Kufi Fun',cursive;
+    font-size:64px;
+    color:#cdb4db;
+    animation:pulseQueen 3s ease-in-out infinite;
+}
+
+@keyframes pulseQueen{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+}
+
+/* القلوب الدائرية */
+.orbit{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:220px;
+    height:220px;
+    margin-left:-110px;
+    margin-top:-110px;
+    animation:spin 10s linear infinite;
+}
+.orbit span{
+    position:absolute;
+    font-size:30px;
+    color:#c77dff;
+}
+.orbit span:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(2){right:0;top:50%;transform:translateY(-50%);}
+.orbit span:nth-child(3){bottom:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(4){left:0;top:50%;transform:translateY(-50%);}
+
+@keyframes spin{
+    from{transform:rotate(0deg);}
+    to{transform:rotate(360deg);}
 }
 
 /* التوقيع */
@@ -181,11 +225,20 @@ body{
     </div>
 
     <button class="main-btn" id="btn" onclick="nextMessage()">💌 اضغطي هنا</button>
+
+    <!-- ست البنات -->
+    <div class="queen-wrapper" id="queenBox">
+        <div id="queen">ست البنات 💜</div>
+        <div class="orbit">
+            <span>💜</span><span>💜</span><span>💜</span><span>💜</span>
+        </div>
+    </div>
+
     <div id="signature"></div>
 </div>
 
 <script>
-/* ===== القفل ===== */
+/* القفل */
 function unlock(){
     const input=document.getElementById("password").value.trim();
     const error=document.getElementById("errorMsg");
@@ -199,7 +252,7 @@ function unlock(){
     }
 }
 
-/* ===== الرسائل ===== */
+/* الرسائل */
 const messages = [
     "يا رب، في زحمة الدنيا دي، لقيت فيها الهدوء.",
     "ولقيت في قلبها المكان البعرف أرجع ليه من غير خوف.",
@@ -229,6 +282,7 @@ const p2=document.getElementById("p2");
 const divider=document.getElementById("divider");
 const btn=document.getElementById("btn");
 const signature=document.getElementById("signature");
+const queenBox=document.getElementById("queenBox");
 
 function nextMessage(){
     if(index < messages.length){
@@ -238,21 +292,18 @@ function nextMessage(){
         p1.style.opacity = p2.style.opacity = 0;
         divider.style.opacity = 0;
 
+        setTimeout(()=>{p1.style.opacity=1;},120);
         setTimeout(()=>{
-            p1.style.opacity = 1;
-            p1.style.transform = "translateY(0)";
-        },120);
-
-        setTimeout(()=>{
-            divider.style.opacity = 1;
-            p2.style.opacity = 1;
-            p2.style.transform = "translateY(0)";
+            divider.style.opacity=1;
+            p2.style.opacity=1;
         },420);
 
         index += 2;
 
         if(index >= messages.length){
             btn.style.display="none";
+            queenBox.style.opacity="1";
+            queenBox.style.transform="scale(1)";
             signature.innerText="— كمال، الاختارك وما ندم ❤️";
             signature.style.opacity=1;
             signature.style.transform="translateY(0)";
