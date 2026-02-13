@@ -19,21 +19,34 @@ body {
     color: #fff;
 }
 
-/* نجوم */
+/* ===== نجوم ===== */
 .star {
     position: absolute;
     width: 2px;
     height: 2px;
     background: white;
-    opacity: 0.6;
-    animation: twinkle 4s infinite ease-in-out;
+    opacity: 0.5;
+    animation: twinkle 5s infinite ease-in-out;
 }
 @keyframes twinkle {
     0%,100% { opacity: 0.3; }
-    50% { opacity: 1; }
+    50% { opacity: 0.9; }
 }
 
-/* الكرت */
+/* ===== قلوب خلفية ===== */
+.bg-heart {
+    position: absolute;
+    font-size: 28px;
+    color: rgba(199,125,255,0.25);
+    animation: drift 18s linear infinite;
+    pointer-events: none;
+}
+@keyframes drift {
+    from { transform: translateY(110vh); }
+    to { transform: translateY(-120vh); }
+}
+
+/* ===== الكرت ===== */
 .card {
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(12px);
@@ -47,26 +60,26 @@ body {
     z-index: 2;
 }
 
-/* الاسم الرئيسي */
+/* ===== الاسم ===== */
 #name {
     font-family: 'Reem Kufi Fun', cursive;
     font-size: 66px;
     color: #ffd166;
     margin-bottom: 34px;
-    animation: pulse 2.8s ease-in-out infinite;
+    animation: pulseMain 3s ease-in-out infinite;
 }
-@keyframes pulse {
+@keyframes pulseMain {
     0%,100% {
         transform: scale(1);
-        text-shadow: 0 0 10px #ffd166;
+        text-shadow: 0 0 12px #ffd166;
     }
     50% {
-        transform: scale(1.08);
+        transform: scale(1.07);
         text-shadow: 0 0 30px #ffd166;
     }
 }
 
-/* الرسائل */
+/* ===== الرسائل ===== */
 .message-box p {
     font-size: 46px;
     line-height: 2.4;
@@ -75,24 +88,21 @@ body {
     transform: translateY(16px);
     transition: all 1.2s ease;
 }
-.message-box p + p {
-    margin-top: 34px;
-}
+.message-box p + p { margin-top: 34px; }
 
-/* فاصل */
+/* ===== فاصل ===== */
 .divider {
     width: 90px;
     height: 3px;
     background: linear-gradient(to right, transparent, #ffd166, transparent);
     margin: 38px auto;
     opacity: 0;
-    transition: opacity 1s ease;
 }
 
 /* ===== ست البنات ===== */
 .queen-wrapper {
     position: relative;
-    margin-top: 40px;
+    margin-top: 44px;
     opacity: 0;
     transform: scale(0.8);
     transition: all 1.5s ease;
@@ -100,26 +110,33 @@ body {
 
 #queen {
     font-family: 'Reem Kufi Fun', cursive;
-    font-size: 58px;
+    font-size: 60px;
     color: #cdb4db;
+    animation: pulseQueen 3s ease-in-out infinite;
     text-shadow: 0 0 25px rgba(205,180,219,0.9);
 }
 
-/* قلوب بنفسجية تدور */
+/* نبض متزامن */
+@keyframes pulseQueen {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ===== قلوب تدور وتنبض ===== */
 .orbit {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 180px;
-    height: 180px;
-    margin-left: -90px;
-    margin-top: -90px;
-    animation: spin 8s linear infinite;
+    width: 190px;
+    height: 190px;
+    margin-left: -95px;
+    margin-top: -95px;
+    animation: spin 9s linear infinite, pulseQueen 3s ease-in-out infinite;
 }
 
 .orbit span {
     position: absolute;
-    font-size: 28px;
+    font-size: 30px;
     color: #c77dff;
 }
 
@@ -133,7 +150,7 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* التوقيع */
+/* ===== التوقيع ===== */
 #signature {
     margin-top: 40px;
     font-size: 34px;
@@ -142,7 +159,7 @@ body {
     transition: all 1.8s ease;
 }
 
-/* الزر */
+/* ===== الزر ===== */
 button {
     margin-top: 50px;
     padding: 18px 60px;
@@ -152,29 +169,13 @@ button {
     background: linear-gradient(135deg, #ff4d6d, #ff758f);
     color: white;
     cursor: pointer;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
-/* قلوب الخلفية */
-.heart {
-    position: absolute;
-    font-size: 70px;
-    animation: floatSlow 7s ease-in-out forwards;
-    pointer-events: none;
-    opacity: 0.8;
-}
-@keyframes floatSlow {
-    to {
-        transform: translate(var(--x), var(--y)) scale(1.6);
-        opacity: 0;
-    }
-}
-
-/* موبايل */
+/* 📱 موبايل */
 @media (max-width: 600px) {
     #name { font-size: 76px; }
     .message-box p { font-size: 52px; }
-    #queen { font-size: 64px; }
+    #queen { font-size: 66px; }
     #signature { font-size: 38px; }
 }
 </style>
@@ -183,13 +184,25 @@ button {
 <body>
 
 <script>
+/* نجوم */
 for (let i = 0; i < 80; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    star.style.left = Math.random() * 100 + "vw";
-    star.style.top = Math.random() * 100 + "vh";
-    star.style.animationDelay = Math.random() * 4 + "s";
-    document.body.appendChild(star);
+    const s = document.createElement("div");
+    s.className = "star";
+    s.style.left = Math.random()*100 + "vw";
+    s.style.top = Math.random()*100 + "vh";
+    s.style.animationDelay = Math.random()*5 + "s";
+    document.body.appendChild(s);
+}
+
+/* قلوب خلفية */
+for (let i = 0; i < 20; i++) {
+    const h = document.createElement("div");
+    h.className = "bg-heart";
+    h.innerHTML = "💜";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.animationDuration = (14 + Math.random()*10) + "s";
+    h.style.fontSize = (18 + Math.random()*20) + "px";
+    document.body.appendChild(h);
 }
 </script>
 
@@ -202,14 +215,10 @@ for (let i = 0; i < 80; i++) {
         <p id="p2"></p>
     </div>
 
-    <!-- ست البنات -->
     <div class="queen-wrapper" id="queenBox">
         <div id="queen">ست البنات 💜</div>
         <div class="orbit">
-            <span>💜</span>
-            <span>💜</span>
-            <span>💜</span>
-            <span>💜</span>
+            <span>💜</span><span>💜</span><span>💜</span><span>💜</span>
         </div>
     </div>
 
@@ -221,22 +230,16 @@ for (let i = 0; i < 80; i++) {
 const messages = [
     "يا رب، في زحمة الدنيا دي، لقيت فيها الهدوء.",
     "ولقيت في قلبها المكان البعرف أرجع ليه من غير خوف.",
-
     "ما كانت مجرد حُب.",
     "كانت طمأنينة، وكانت الأمان البنتعب نلقاه في الزمن دا.",
-
     "يا رب، احفظها لي في ضحكتها.",
     "وفي سعادتها، وفي كل لحظة ضعف وقوة.",
-
     "خلّيني دايمًا السبب في راحتها.",
     "وخلّي وجودي في حياتها خير وما وجع.",
-
     "واجعل بينا ود ما ينكسر.",
     "وحب ما تهزو الأيام.",
-
     "قلبي اختارها.",
     "واختياره دا كان أجمل قرار.",
-
     "عشان كدا يا رب، ختِم دعائي بيها دايمًا.",
     "واحفظها لي، لأن قلبي ما داير غيرها."
 ];
@@ -244,7 +247,6 @@ const messages = [
 let index = 0;
 const p1 = document.getElementById("p1");
 const p2 = document.getElementById("p2");
-const divider = document.getElementById("divider");
 const btn = document.getElementById("btn");
 const signature = document.getElementById("signature");
 const queenBox = document.getElementById("queenBox");
@@ -252,30 +254,21 @@ const queenBox = document.getElementById("queenBox");
 function nextMessage() {
     if (index < messages.length) {
         p1.innerText = messages[index];
-        p2.innerText = messages[index + 1];
-
+        p2.innerText = messages[index+1];
         p1.style.opacity = p2.style.opacity = 0;
-        divider.style.opacity = 0;
-
-        setTimeout(() => p1.style.opacity = 1, 150);
-        setTimeout(() => {
-            divider.style.opacity = 1;
-            p2.style.opacity = 1;
-        }, 450);
-
+        setTimeout(()=>{p1.style.opacity=1;},150);
+        setTimeout(()=>{p2.style.opacity=1;},450);
         index += 2;
 
         if (index >= messages.length) {
             btn.style.display = "none";
-
             queenBox.style.opacity = "1";
             queenBox.style.transform = "scale(1)";
-
-            setTimeout(() => {
+            setTimeout(()=>{
                 signature.innerText = "— كمال، الاختارك وما ندم ❤️";
                 signature.style.opacity = 1;
                 signature.style.transform = "translateY(0)";
-            }, 1800);
+            },1800);
         }
     }
 }
