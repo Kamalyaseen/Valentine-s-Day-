@@ -7,221 +7,76 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Reem+Kufi+Fun:wght@700&display=swap');
 
-body {
-    margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at top, #0b132b, #1c2541, #3a506b);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Aref Ruqaa', serif;
-    overflow: hidden;
-    color: #fff;
+body{
+    margin:0;
+    height:100vh;
+    background:radial-gradient(circle at top,#0b132b,#1c2541,#3a506b);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Aref Ruqaa',serif;
+    overflow:hidden;
+    color:#fff;
 }
 
 /* شاشة القفل */
-.lock-screen {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at top, #0b132b, #1c2541);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+.lock-screen{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top,#0b132b,#1c2541);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
 }
-
-.lock-box {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    padding: 50px 40px;
-    border-radius: 30px;
-    text-align: center;
-    max-width: 420px;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+.lock-box{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    padding:50px 40px;
+    border-radius:30px;
+    text-align:center;
+    max-width:420px;
+    box-shadow:0 25px 80px rgba(0,0,0,0.5);
 }
-
-.lock-icon {
-    font-size: 64px;
-    margin-bottom: 20px;
+.lock-icon{
+    font-size:64px;
+    margin-bottom:20px;
 }
-
-.lock-box h2 {
-    font-family: 'Reem Kufi Fun', cursive;
-    font-size: 36px;
-    margin-bottom: 18px;
-    color: #ffd166;
+.lock-box h2{
+    font-family:'Reem Kufi Fun',cursive;
+    font-size:36px;
+    margin-bottom:18px;
+    color:#ffd166;
 }
-
-.lock-box p {
-    font-size: 26px;
-    line-height: 1.8;
-    margin-bottom: 25px;
+.lock-box p{
+    font-size:26px;
+    line-height:1.8;
+    margin-bottom:25px;
 }
-
-.lock-box input {
-    width: 100%;
-    padding: 14px 18px;
-    border-radius: 40px;
-    border: none;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 18px;
-    outline: none;
-    font-family: 'Aref Ruqaa', serif;
+.lock-box input{
+    width:100%;
+    padding:14px 18px;
+    border-radius:40px;
+    border:none;
+    font-size:20px;
+    text-align:center;
+    margin-bottom:18px;
+    outline:none;
+    font-family:'Aref Ruqaa',serif;
 }
-
-.lock-box button {
-    padding: 14px 44px;
-    border: none;
-    border-radius: 50px;
-    font-size: 20px;
-    background: linear-gradient(135deg, #ff4d6d, #ff758f);
-    color: white;
-    cursor: pointer;
+.lock-box button{
+    padding:14px 44px;
+    border:none;
+    border-radius:50px;
+    font-size:20px;
+    background:linear-gradient(135deg,#ff4d6d,#ff758f);
+    color:white;
+    cursor:pointer;
 }
-
-.error {
-    margin-top: 12px;
-    font-size: 20px;
-    color: #ffb3c1;
-}
-
-/* نجوم */
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: white;
-    opacity: 0.5;
-    animation: twinkle 5s infinite ease-in-out;
-}
-@keyframes twinkle {
-    0%,100% { opacity: 0.3; }
-    50% { opacity: 1; }
-}
-
-/* قلوب خلفية */
-.bg-heart {
-    position: absolute;
-    font-size: 26px;
-    color: rgba(199,125,255,0.25);
-    animation: drift 18s linear infinite;
-}
-@keyframes drift {
-    from { transform: translateY(110vh); }
-    to { transform: translateY(-120vh); }
-}
-
-/* الكرت */
-.card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    border-radius: 30px;
-    padding: 60px 45px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 2;
-}
-
-/* الاسم */
-#name {
-    font-family: 'Reem Kufi Fun', cursive;
-    font-size: 66px;
-    color: #ffd166;
-    margin-bottom: 34px;
-    animation: pulse 3s ease-in-out infinite;
-}
-@keyframes pulse {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.07); }
-}
-
-/* الرسائل */
-.message-box p {
-    font-size: 46px;
-    line-height: 2.4;
-    margin: 0;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: all 1.2s ease;
-}
-.message-box p + p { margin-top: 34px; }
-
-/* ست البنات */
-.queen-wrapper {
-    position: relative;
-    margin-top: 44px;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: all 1.5s ease;
-}
-
-#queen {
-    font-family: 'Reem Kufi Fun', cursive;
-    font-size: 60px;
-    color: #cdb4db;
-    animation: pulseQueen 3s ease-in-out infinite;
-}
-@keyframes pulseQueen {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.12); }
-}
-
-/* قلوب دائرية */
-.orbit {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200px;
-    height: 200px;
-    margin-left: -100px;
-    margin-top: -100px;
-    animation: spin 10s linear infinite;
-}
-
-.orbit span {
-    position: absolute;
-    font-size: 32px;
-    color: #c77dff;
-    animation: pulseOrbit 3s ease-in-out infinite;
-}
-
-.orbit span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-.orbit span:nth-child(2) { right: 0; top: 50%; transform: translateY(-50%); }
-.orbit span:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
-.orbit span:nth-child(4) { left: 0; top: 50%; transform: translateY(-50%); }
-
-@keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-@keyframes pulseOrbit {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.35); }
-}
-
-/* التوقيع */
-#signature {
-    margin-top: 40px;
-    font-size: 34px;
-    opacity: 0;
-    transform: translateY(14px);
-    transition: all 1.8s ease;
-}
-
-/* الزر */
-button.main {
-    margin-top: 50px;
-    padding: 18px 60px;
-    border: none;
-    border-radius: 60px;
-    font-size: 24px;
-    background: linear-gradient(135deg, #ff4d6d, #ff758f);
-    color: white;
-    cursor: pointer;
+.error{
+    margin-top:12px;
+    font-size:20px;
+    color:#ffb3c1;
 }
 </style>
 </head>
@@ -236,13 +91,13 @@ button.main {
         <p>
             المكان الدايمًا ترجع ليه<br>
             بدون خوف، بدون شروط<br>
-            أدخلي التاريخ البجمعنا 💜
+            أدخلي الرمز 💜
         </p>
 
         <input
             type="tel"
             id="password"
-            placeholder="14/2/2026"
+            placeholder="اكتبي الرمز هنا"
             inputmode="numeric"
             oninput="this.value=this.value.replace(/[^0-9/]/g,'')"
         >
@@ -253,16 +108,16 @@ button.main {
 </div>
 
 <script>
-function unlock() {
-    const input = document.getElementById("password").value.trim();
-    const error = document.getElementById("errorMsg");
+function unlock(){
+    const input=document.getElementById("password").value.trim();
+    const error=document.getElementById("errorMsg");
 
-    if (input === "14/2/2026") {
-        const lock = document.getElementById("lockScreen");
-        lock.style.opacity = "0";
-        setTimeout(() => lock.remove(), 800);
-    } else {
-        error.innerText = "التاريخ دا ما صحيح… جرّبي تاني 💔";
+    if(input==="12/12/2025"){
+        const lock=document.getElementById("lockScreen");
+        lock.style.opacity="0";
+        setTimeout(()=>lock.remove(),800);
+    }else{
+        error.innerText="الرمز دا ما صحيح… جرّبي تاني 💔";
     }
 }
 </script>
