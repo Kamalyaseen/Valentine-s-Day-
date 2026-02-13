@@ -19,7 +19,7 @@ body{
     color:#fff;
 }
 
-/* ========== شاشة القفل ========== */
+/* ================= القفل ================= */
 .lock-screen{
     position:fixed;
     inset:0;
@@ -75,7 +75,7 @@ body{
     color:#ffb3c1;
 }
 
-/* ========== الكرت ========== */
+/* ================= الكرت ================= */
 .card{
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(12px);
@@ -120,7 +120,7 @@ body{
     transition:opacity 1s ease;
 }
 
-/* ========== ست البنات ========== */
+/* ================= ست البنات ================= */
 .queen-wrapper{
     position:relative;
     margin-top:48px;
@@ -226,7 +226,6 @@ body{
 
     <button class="main-btn" id="btn" onclick="nextMessage()">💌 اضغطي هنا</button>
 
-    <!-- ست البنات -->
     <div class="queen-wrapper" id="queenBox">
         <div id="queen">ست البنات 💜</div>
         <div class="orbit">
@@ -238,12 +237,23 @@ body{
 </div>
 
 <script>
-/* القفل */
+/* ===== إعداد القفل المؤقت (ساعتين) ===== */
+const LOCK_DURATION = 2 * 60 * 60 * 1000;
+
+window.onload = function () {
+    const lastUnlock = localStorage.getItem("lastUnlockTime");
+    if (lastUnlock && Date.now() - lastUnlock < LOCK_DURATION) {
+        const lock = document.getElementById("lockScreen");
+        lock.remove();
+    }
+};
+
 function unlock(){
     const input=document.getElementById("password").value.trim();
     const error=document.getElementById("errorMsg");
 
     if(input==="12/12/2025"){
+        localStorage.setItem("lastUnlockTime", Date.now());
         const lock=document.getElementById("lockScreen");
         lock.style.opacity="0";
         setTimeout(()=>lock.remove(),800);
@@ -252,7 +262,7 @@ function unlock(){
     }
 }
 
-/* الرسائل */
+/* ===== الرسائل ===== */
 const messages = [
     "يا رب، في زحمة الدنيا دي، لقيت فيها الهدوء.",
     "ولقيت في قلبها المكان البعرف أرجع ليه من غير خوف.",
