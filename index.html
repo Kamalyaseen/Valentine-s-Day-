@@ -10,136 +10,188 @@
 body {
     margin: 0;
     height: 100vh;
-    background: radial-gradient(circle at top, #1b263b, #0d1b2a);
+    background: radial-gradient(circle at top, #0b132b, #1c2541, #3a506b);
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: 'Aref Ruqaa', serif;
     overflow: hidden;
+    color: #fff;
+}
+
+/* نجوم */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    opacity: 0.6;
+    animation: twinkle 4s infinite ease-in-out;
+}
+@keyframes twinkle {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 1; }
 }
 
 /* الكرت */
 .card {
     background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(10px);
-    border-radius: 28px;
-    padding: 55px 40px;
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    padding: 60px 45px;
     width: 90%;
-    max-width: 480px;
+    max-width: 500px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.5);
     position: relative;
     z-index: 2;
 }
 
-/* الاسم */
+/* الاسم الرئيسي */
 #name {
     font-family: 'Reem Kufi Fun', cursive;
-    font-size: 64px;
+    font-size: 66px;
     color: #ffd166;
-    margin-bottom: 32px;
-    letter-spacing: 3px;
-    animation: glow 3s ease-in-out infinite;
+    margin-bottom: 34px;
+    animation: pulse 2.8s ease-in-out infinite;
 }
-
-@keyframes glow {
-    0%,100% { text-shadow: 0 0 16px #ffd166; }
-    50% { text-shadow: 0 0 40px #ffb703; }
+@keyframes pulse {
+    0%,100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px #ffd166;
+    }
+    50% {
+        transform: scale(1.08);
+        text-shadow: 0 0 30px #ffd166;
+    }
 }
 
 /* الرسائل */
 .message-box p {
-    font-size: 44px;
-    line-height: 2.3;
+    font-size: 46px;
+    line-height: 2.4;
     margin: 0;
     opacity: 0;
-    transform: translateY(14px);
-    transition: all 1s ease;
-    color: #ffffff;
+    transform: translateY(16px);
+    transition: all 1.2s ease;
 }
-
 .message-box p + p {
-    margin-top: 32px;
-    color: #ffffff;
+    margin-top: 34px;
 }
 
-/* الفاصل */
+/* فاصل */
 .divider {
-    width: 80px;
+    width: 90px;
     height: 3px;
     background: linear-gradient(to right, transparent, #ffd166, transparent);
-    margin: 36px auto;
+    margin: 38px auto;
     opacity: 0;
     transition: opacity 1s ease;
+}
+
+/* ===== ست البنات ===== */
+.queen-wrapper {
+    position: relative;
+    margin-top: 40px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 1.5s ease;
+}
+
+#queen {
+    font-family: 'Reem Kufi Fun', cursive;
+    font-size: 58px;
+    color: #cdb4db;
+    text-shadow: 0 0 25px rgba(205,180,219,0.9);
+}
+
+/* قلوب بنفسجية تدور */
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 180px;
+    height: 180px;
+    margin-left: -90px;
+    margin-top: -90px;
+    animation: spin 8s linear infinite;
+}
+
+.orbit span {
+    position: absolute;
+    font-size: 28px;
+    color: #c77dff;
+}
+
+.orbit span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
+.orbit span:nth-child(2) { right: 0; top: 50%; transform: translateY(-50%); }
+.orbit span:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
+.orbit span:nth-child(4) { left: 0; top: 50%; transform: translateY(-50%); }
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* التوقيع */
 #signature {
     margin-top: 40px;
-    font-size: 32px;
-    color: #ffffff;
+    font-size: 34px;
     opacity: 0;
-    transform: translateY(12px);
-    transition: all 1.5s ease;
+    transform: translateY(14px);
+    transition: all 1.8s ease;
 }
 
 /* الزر */
 button {
-    margin-top: 48px;
-    padding: 18px 56px;
+    margin-top: 50px;
+    padding: 18px 60px;
     border: none;
-    border-radius: 50px;
-    font-size: 22px;
-    background: linear-gradient(135deg, #e63946, #ff758f);
+    border-radius: 60px;
+    font-size: 24px;
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
     color: white;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 
-/* القلوب */
+/* قلوب الخلفية */
 .heart {
     position: absolute;
-    font-size: 76px;
-    animation: floatRandom 6.5s ease-in-out forwards;
-    z-index: 1;
+    font-size: 70px;
+    animation: floatSlow 7s ease-in-out forwards;
     pointer-events: none;
+    opacity: 0.8;
 }
-
-@keyframes floatRandom {
-    from {
-        opacity: 1;
-        transform: translate(0, 0) scale(1);
-    }
+@keyframes floatSlow {
     to {
+        transform: translate(var(--x), var(--y)) scale(1.6);
         opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(1.9);
     }
 }
 
-/* 📱 تكبير خاص بالموبايل */
+/* موبايل */
 @media (max-width: 600px) {
-    #name {
-        font-size: 72px;
-    }
-
-    .message-box p {
-        font-size: 50px;
-        line-height: 2.4;
-    }
-
-    #signature {
-        font-size: 36px;
-    }
-
-    button {
-        font-size: 24px;
-        padding: 20px 60px;
-    }
+    #name { font-size: 76px; }
+    .message-box p { font-size: 52px; }
+    #queen { font-size: 64px; }
+    #signature { font-size: 38px; }
 }
 </style>
 </head>
 
 <body>
+
+<script>
+for (let i = 0; i < 80; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "vw";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.animationDelay = Math.random() * 4 + "s";
+    document.body.appendChild(star);
+}
+</script>
 
 <div class="card">
     <div id="name">💖 دعاء 💖</div>
@@ -148,6 +200,17 @@ button {
         <p id="p1"></p>
         <div class="divider" id="divider"></div>
         <p id="p2"></p>
+    </div>
+
+    <!-- ست البنات -->
+    <div class="queen-wrapper" id="queenBox">
+        <div id="queen">ست البنات 💜</div>
+        <div class="orbit">
+            <span>💜</span>
+            <span>💜</span>
+            <span>💜</span>
+            <span>💜</span>
+        </div>
     </div>
 
     <div id="signature"></div>
@@ -176,9 +239,7 @@ const messages = [
 
     "عشان كدا يا رب، ختِم دعائي بيها دايمًا.",
     "واحفظها لي، لأن قلبي ما داير غيرها."
-];   "ست البنات❤️"
-
-const heartColors = ["#ff4d6d","#ff758f","#ffd166","#ffafcc","#cdb4db","#a2d2ff"];
+];
 
 let index = 0;
 const p1 = document.getElementById("p1");
@@ -186,55 +247,37 @@ const p2 = document.getElementById("p2");
 const divider = document.getElementById("divider");
 const btn = document.getElementById("btn");
 const signature = document.getElementById("signature");
+const queenBox = document.getElementById("queenBox");
 
 function nextMessage() {
     if (index < messages.length) {
-
         p1.innerText = messages[index];
         p2.innerText = messages[index + 1];
 
         p1.style.opacity = p2.style.opacity = 0;
         divider.style.opacity = 0;
 
-        setTimeout(() => {
-            p1.style.opacity = 1;
-            p1.style.transform = "translateY(0)";
-        }, 120);
-
+        setTimeout(() => p1.style.opacity = 1, 150);
         setTimeout(() => {
             divider.style.opacity = 1;
             p2.style.opacity = 1;
-            p2.style.transform = "translateY(0)";
-        }, 420);
+        }, 450);
 
         index += 2;
 
-        for (let i = 0; i < 12; i++) createHeart();
-
         if (index >= messages.length) {
             btn.style.display = "none";
-            signature.innerText = "— كمال، الاختارك وما ندم ❤️";
-            signature.style.opacity = 1;
-            signature.style.transform = "translateY(0)";
+
+            queenBox.style.opacity = "1";
+            queenBox.style.transform = "scale(1)";
+
+            setTimeout(() => {
+                signature.innerText = "— كمال، الاختارك وما ندم ❤️";
+                signature.style.opacity = 1;
+                signature.style.transform = "translateY(0)";
+            }, 1800);
         }
     }
-}
-
-function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "❤";
-
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.top = Math.random() * 100 + "vh";
-    heart.style.setProperty("--x", (Math.random() * 240 - 120) + "px");
-    heart.style.setProperty("--y", (-Math.random() * 360 - 140) + "px");
-
-    heart.style.color =
-        heartColors[Math.floor(Math.random() * heartColors.length)];
-
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6500);
 }
 </script>
 
