@@ -60,7 +60,7 @@ body {
     z-index: 2;
 }
 
-/* الاسم */
+/* اسم دعاء */
 #name {
     font-family: 'Reem Kufi Fun', cursive;
     font-size: 66px;
@@ -69,8 +69,8 @@ body {
     animation: pulseMain 3s ease-in-out infinite;
 }
 @keyframes pulseMain {
-    0%,100% { transform: scale(1); text-shadow: 0 0 12px #ffd166; }
-    50% { transform: scale(1.07); text-shadow: 0 0 32px #ffd166; }
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.07); }
 }
 
 /* الرسائل */
@@ -98,27 +98,11 @@ body {
     font-size: 60px;
     color: #cdb4db;
     animation: pulseQueen 3s ease-in-out infinite;
-    text-shadow:
-        0 0 10px rgba(205,180,219,0.6),
-        0 0 25px rgba(205,180,219,0.9),
-        0 0 40px rgba(199,125,255,0.6);
 }
 
 @keyframes pulseQueen {
-    0%,100% {
-        transform: scale(1);
-        text-shadow:
-            0 0 10px rgba(205,180,219,0.6),
-            0 0 25px rgba(205,180,219,0.9),
-            0 0 40px rgba(199,125,255,0.6);
-    }
-    50% {
-        transform: scale(1.12);
-        text-shadow:
-            0 0 20px rgba(205,180,219,0.9),
-            0 0 45px rgba(199,125,255,1),
-            0 0 70px rgba(199,125,255,0.8);
-    }
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
 }
 
 /* قلوب تدور وتنبض */
@@ -138,9 +122,6 @@ body {
     font-size: 32px;
     color: #c77dff;
     animation: pulseOrbit 3s ease-in-out infinite;
-    text-shadow:
-        0 0 12px rgba(199,125,255,0.8),
-        0 0 25px rgba(199,125,255,1);
 }
 
 .orbit span:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
