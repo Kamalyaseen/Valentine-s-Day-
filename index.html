@@ -19,7 +19,7 @@ body{
     color:#fff;
 }
 
-/* شاشة القفل */
+/* ================= القفل ================= */
 .lock-screen{
     position:fixed;
     inset:0;
@@ -38,24 +38,21 @@ body{
     max-width:420px;
     box-shadow:0 25px 80px rgba(0,0,0,0.5);
 }
-.lock-icon{
-    font-size:64px;
-    margin-bottom:20px;
-}
+.lock-icon{font-size:64px;margin-bottom:20px;}
 .lock-box h2{
     font-family:'Reem Kufi Fun',cursive;
     font-size:36px;
-    margin-bottom:18px;
     color:#ffd166;
+    margin-bottom:14px;
 }
 .lock-box p{
     font-size:26px;
     line-height:1.8;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 .lock-box input{
     width:100%;
-    padding:14px 18px;
+    padding:14px;
     border-radius:40px;
     border:none;
     font-size:20px;
@@ -78,6 +75,74 @@ body{
     font-size:20px;
     color:#ffb3c1;
 }
+
+/* ================= الكرت ================= */
+.card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
+    border-radius:30px;
+    padding:60px 45px;
+    width:90%;
+    max-width:520px;
+    text-align:center;
+    box-shadow:0 25px 80px rgba(0,0,0,0.5);
+    position:relative;
+    z-index:1;
+}
+
+/* الاسم */
+#name{
+    font-family:'Reem Kufi Fun',cursive;
+    font-size:64px;
+    color:#ffd166;
+    margin-bottom:34px;
+    animation:pulse 3s ease-in-out infinite;
+}
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+}
+
+/* الرسائل */
+.message-box p{
+    font-size:42px;
+    line-height:2.3;
+    margin:0;
+    opacity:0;
+    transform:translateY(16px);
+    transition:all 1.2s ease;
+}
+.message-box p + p{margin-top:30px;}
+
+.divider{
+    width:80px;
+    height:3px;
+    background:linear-gradient(to right,transparent,#ffd166,transparent);
+    margin:36px auto;
+    opacity:0;
+    transition:opacity 1s ease;
+}
+
+/* التوقيع */
+#signature{
+    margin-top:42px;
+    font-size:32px;
+    opacity:0;
+    transform:translateY(14px);
+    transition:all 1.6s ease;
+}
+
+/* زر */
+.main-btn{
+    margin-top:46px;
+    padding:18px 56px;
+    border:none;
+    border-radius:60px;
+    font-size:24px;
+    background:linear-gradient(135deg,#ff4d6d,#ff758f);
+    color:white;
+    cursor:pointer;
+}
 </style>
 </head>
 
@@ -93,7 +158,6 @@ body{
             بدون خوف، بدون شروط<br>
             أدخلي الرمز 💜
         </p>
-
         <input
             type="tel"
             id="password"
@@ -101,13 +165,27 @@ body{
             inputmode="numeric"
             oninput="this.value=this.value.replace(/[^0-9/]/g,'')"
         >
-
         <button onclick="unlock()">🔓 افتحي القلب</button>
         <div class="error" id="errorMsg"></div>
     </div>
 </div>
 
+<!-- محتوى الرسالة -->
+<div class="card">
+    <div id="name">💖 دعاء 💖</div>
+
+    <div class="message-box">
+        <p id="p1"></p>
+        <div class="divider" id="divider"></div>
+        <p id="p2"></p>
+    </div>
+
+    <button class="main-btn" id="btn" onclick="nextMessage()">💌 اضغطي هنا</button>
+    <div id="signature"></div>
+</div>
+
 <script>
+/* ===== القفل ===== */
 function unlock(){
     const input=document.getElementById("password").value.trim();
     const error=document.getElementById("errorMsg");
@@ -118,6 +196,67 @@ function unlock(){
         setTimeout(()=>lock.remove(),800);
     }else{
         error.innerText="الرمز دا ما صحيح… جرّبي تاني 💔";
+    }
+}
+
+/* ===== الرسائل ===== */
+const messages = [
+    "يا رب، في زحمة الدنيا دي، لقيت فيها الهدوء.",
+    "ولقيت في قلبها المكان البعرف أرجع ليه من غير خوف.",
+
+    "ما كانت مجرد حُب.",
+    "كانت طمأنينة، وكانت الأمان البنتعب نلقاه في الزمن دا.",
+
+    "يا رب، احفظها لي في ضحكتها.",
+    "وفي سعادتها، وفي كل لحظة ضعف وقوة.",
+
+    "خلّيني دايمًا السبب في راحتها.",
+    "وخلّي وجودي في حياتها خير وما وجع.",
+
+    "واجعل بينا ود ما ينكسر.",
+    "وحب ما تهزو الأيام.",
+
+    "قلبي اختارها.",
+    "واختياره دا كان أجمل قرار.",
+
+    "عشان كدا يا رب، ختِم دعائي بيها دايمًا.",
+    "واحفظها لي، لأن قلبي ما داير غيرها."
+];
+
+let index=0;
+const p1=document.getElementById("p1");
+const p2=document.getElementById("p2");
+const divider=document.getElementById("divider");
+const btn=document.getElementById("btn");
+const signature=document.getElementById("signature");
+
+function nextMessage(){
+    if(index < messages.length){
+        p1.innerText = messages[index];
+        p2.innerText = messages[index+1];
+
+        p1.style.opacity = p2.style.opacity = 0;
+        divider.style.opacity = 0;
+
+        setTimeout(()=>{
+            p1.style.opacity = 1;
+            p1.style.transform = "translateY(0)";
+        },120);
+
+        setTimeout(()=>{
+            divider.style.opacity = 1;
+            p2.style.opacity = 1;
+            p2.style.transform = "translateY(0)";
+        },420);
+
+        index += 2;
+
+        if(index >= messages.length){
+            btn.style.display="none";
+            signature.innerText="— كمال، الاختارك وما ندم ❤️";
+            signature.style.opacity=1;
+            signature.style.transform="translateY(0)";
+        }
     }
 }
 </script>
